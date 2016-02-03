@@ -3,8 +3,6 @@ var model = new Backbone.Model({name: 'Tommy', lastName: "Gavin"});
 
 (function($, Backbone) {
 
-
-
     $(function () {
         // The DOM is ready;
         var h1 = $('#h1');
@@ -33,13 +31,33 @@ var model = new Backbone.Model({name: 'Tommy', lastName: "Gavin"});
             }
         });
 
-
-
         var simpleView = new SimpleView({
             model: model,
             el: '#view1'
         });
         simpleView.render();
+        
+        
+        //******** STICKIT ************//
+        var StickitView = Backbone.View.extend({
+            bindings: {
+                '#nameSt': 'name'
+            },
+
+            initialize: function () {
+                
+            },
+            
+            render: function () {
+                this.stickit();
+                return this;
+            }
+        });
+        var stickitView = new StickitView({
+            model: model,
+            el: '#view2'
+        });
+        stickitView.render();
 
     });
 
