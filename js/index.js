@@ -1,5 +1,5 @@
 // made global for easier testing purpose...
-var model = new Backbone.Model({name: 'Tommy', lastName: "Gavin"});
+var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
 
 (function($, Backbone) {
 
@@ -39,6 +39,7 @@ var model = new Backbone.Model({name: 'Tommy', lastName: "Gavin"});
         
         
         //******** STICKIT ************//
+        var newModel = new Backbone.Model({param1: "value1"});
         var StickitView = Backbone.View.extend({
             bindings: {
                 '#nameSt': 'name'
@@ -50,6 +51,9 @@ var model = new Backbone.Model({name: 'Tommy', lastName: "Gavin"});
             
             render: function () {
                 this.stickit();
+                if (true) {
+                    this.addBinding(newModel, '#readOnlyNameSt', 'param1');
+                }
                 return this;
             }
         });
