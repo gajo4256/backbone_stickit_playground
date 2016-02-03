@@ -39,7 +39,7 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
         
         
         //******** STICKIT ************//
-        var newModel = new Backbone.Model({param1: "value1"});
+        var newModel = new Backbone.Model({param1: "02/02/2016"});
         var StickitView = Backbone.View.extend({
             bindings: {
                 '#nameSt': 'name'
@@ -48,13 +48,32 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
             initialize: function () {
                 
             },
-            
+
             render: function () {
                 this.stickit();
                 if (true) {
-                    this.addBinding(newModel, '#readOnlyNameSt', 'param1');
+                    this.addBinding(newModel, '#nameSt2', this.customBindings());
+                    this.addBinding(newModel, '#readOnlyLastNameSt', 'param1');
                 }
                 return this;
+            },
+
+            customBindings: function () {
+                return {
+                    observe: 'param1',
+                    onGet: function (value) {
+                        var values = value.split('/');
+                        return this.simpleDateFormat(values, '.');
+                    },
+                    onSet: function (value) {
+                        var values = value.split('.');
+                        return this.simpleDateFormat(values, '/');
+                    }
+                }
+            },
+
+            simpleDateFormat: function (values, separator) {
+                return values[0] + separator + values[1] + separator + values[2];
             }
         });
         var stickitView = new StickitView({
