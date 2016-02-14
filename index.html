@@ -14,23 +14,62 @@
 
     <h1 id="h1">This will be replaced</h1>
 
-    <div id="view1">
+    <!-- view1 start-->
+    <div id="view1" class="row">
 
-        <label for="name">Name: </label>
-        <input id="name" type="text"/>
-        <input id="readOnlyName" type="text" readonly/>
-        <input id="readOnlyLastName" type="text" readonly/>
+
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="readOnlyName" class="col-sm-2 control-label">ReadOnlyName</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="readOnlyName" placeholder="ReadOnlyName">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="readOnlyLastName" class="col-sm-2 control-label">ReadOnlyLastName</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="readOnlyLastName" placeholder="ReadOnlyLastName">
+            </div>
+        </div>
+
     </div>
+    <!-- view1 end-->
 
     <hr>
 
-    <div id="view2">
+    <!-- view2 start-->
+    <div id="view2" class="row">
 
-        <label for="nameSt">Name: </label>
-        <input id="nameSt" type="text"/>
-        <input id="nameSt2" type="text"/>
-        <input id="readOnlyLastNameSt" type="text" readonly/>
+        <div class="form-group">
+            <label for="nameSt" class="col-sm-2 control-label">NameSt</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nameSt" placeholder="NameSt">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nameSt2" class="col-sm-2 control-label">NameSt2</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nameSt2" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="readOnlyLastNameSt" class="col-sm-2 control-label">ReadOnlyLastNameSt</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="readOnlyLastNameSt" placeholder="ReadOnlyLastNameSt">
+            </div>
+        </div>
+
     </div>
+    <!-- view2 end-->
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
