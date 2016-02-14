@@ -53,17 +53,11 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                     visible: 'isVisible'
                 },
                 '#selectId': {
-                    observe: 'id',
+                    observe: 'multipleValue',
                     selectOptions: {
                         collection: function () {
-                            return {
-                                'opt_labels': ['Looney Tunes', 'Three Stooges'],
-                                'Looney Tunes': [{id: 1, name: 'Bugs Bunny'}, {id: 2, name: 'Donald Duck'}],
-                                'Three Stooges': [{id: 3, name: 'moe'}, {id: 4, name: 'larry'}, {id: 5, name: 'curly'}]
-                            };
-                        },
-                        labelPath: 'name',
-                        valuePath: 'id'
+                            return [1, 2, 3, 4];
+                        }
                     }
                 }
             },
