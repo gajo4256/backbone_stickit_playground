@@ -40,11 +40,33 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
 
         //******** STICKIT ************//
         var newModel = new Backbone.Model({param1: "02/02/2016"});
+        var newCollection = new Backbone.Collection([
+            {id: 1, data: {state: 'Croatia', capital: 'Zagreb'}},
+            {id: 2, data: {state: 'Serbia', capital: 'Beograd'}},
+            {id: 3, data: {state: 'BiH', capital: 'Sarajevo'}}
+        ]);
+
         var StickitView = Backbone.View.extend({
             bindings: {
                 '#nameSt': {
                     observe: 'name',
                     visible: 'isVisible'
+                },
+                '#selectId': {
+                    // normally we would fetch collection from BE, in this example we don't do it and we
+                    // explicitly set 'observe' to some value which will become attribute in model
+                    observe: 'state',
+                    selectOptions: {
+                        collection: function () {
+                            return this.collection;
+                        },
+                        labelPath: 'data.state',
+                        valuePath: 'data.capital',
+                        defaultOption: {
+                            label: '-- Select one --',
+                            value: null
+                        }
+                    }
                 }
             },
 
@@ -93,7 +115,7 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
             },
 
             isVisible: function (val, options) {
-                console.log('aa ' + val + ' ' + options);
+                //console.log('aa ' + val + ' ' + options);
                 if (val.length === 6) {
                     var selector = options.selector.substr(1);
                     options.view.$el.find('label[for=' + selector + ']').hide();
@@ -117,6 +139,7 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
         });
         var stickitView = new StickitView({
             model: model,
+            collection: newCollection,
             el: '#view2'
         });
         stickitView.render();
