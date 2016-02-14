@@ -53,19 +53,17 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                     visible: 'isVisible'
                 },
                 '#selectId': {
-                    // normally we would fetch collection from BE, in this example we don't do it and we
-                    // explicitly set 'observe' to some value which will become attribute in model
-                    observe: 'state',
+                    observe: 'id',
                     selectOptions: {
                         collection: function () {
-                            return this.collection;
+                            return {
+                                'opt_labels': ['Looney Tunes', 'Three Stooges'],
+                                'Looney Tunes': [{id: 1, name: 'Bugs Bunny'}, {id: 2, name: 'Donald Duck'}],
+                                'Three Stooges': [{id: 3, name: 'moe'}, {id: 4, name: 'larry'}, {id: 5, name: 'curly'}]
+                            };
                         },
-                        labelPath: 'data.state',
-                        valuePath: 'data.capital',
-                        defaultOption: {
-                            label: '-- Select one --',
-                            value: null
-                        }
+                        labelPath: 'name',
+                        valuePath: 'id'
                     }
                 }
             },
