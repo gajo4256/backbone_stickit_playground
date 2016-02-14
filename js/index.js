@@ -37,16 +37,26 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
         });
         simpleView.render();
         
-        
+
         //******** STICKIT ************//
         var newModel = new Backbone.Model({param1: "02/02/2016"});
         var StickitView = Backbone.View.extend({
             bindings: {
-                '#nameSt': 'name'
+                '#nameSt': {
+                    observe: 'name',
+                    visible: 'isVisible'
+                }
+            },
+
+            events: {
+                'click #showNameSt2': function (e) {
+                    this.$el.find('label[for=nameSt], input#nameSt').show();
+                    $(e.currentTarget).hide();
+                }
             },
 
             initialize: function () {
-                
+
             },
 
             render: function () {
@@ -80,7 +90,30 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
 
             simpleDateFormat: function (values, separator) {
                 return values[0] + separator + values[1] + separator + values[2];
+            },
+
+            isVisible: function (val, options) {
+                console.log('aa ' + val + ' ' + options);
+                if (val.length === 6) {
+                    var selector = options.selector.substr(1);
+                    options.view.$el.find('label[for=' + selector + ']').hide();
+                    this.renderShowBtnFor(options.selector);
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+
+            renderShowBtnFor: function (selector) {
+                var $nameSt = this.$el.find(selector).val();
+                var $btnShow = this.$el.find('#showNameSt2');
+                if ($nameSt.length !== 6) {
+                    $btnShow.hide()
+                } else {
+                    $btnShow.show();
+                }
             }
+
         });
         var stickitView = new StickitView({
             model: model,
