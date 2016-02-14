@@ -61,15 +61,21 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
             customBindings: function () {
                 return {
                     observe: 'param1',
-                    onGet: function (value) {
-                        var values = value.split('/');
-                        return this.simpleDateFormat(values, '.');
-                    },
+                    onGet: 'formatDate',
                     onSet: function (value) {
                         var values = value.split('.');
                         return this.simpleDateFormat(values, '/');
+                    },
+                    updateModel: function (val, event, options) {
+                        return val.startsWith('02');
                     }
                 }
+            },
+
+            formatDate: function (value, options) {
+                //console.log(options.selector);
+                var values = value.split('/');
+                return this.simpleDateFormat(values, '.');
             },
 
             simpleDateFormat: function (values, separator) {
