@@ -3,6 +3,19 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
 
 (function($, Backbone) {
 
+    Backbone.Stickit.addHandler({
+        selector: '.special_js',
+        initialize: function ($el, model, options) {
+            $el.select2({allowClear: true});
+        }
+        //update: function ($el, val) {
+        //    $el.val(val);
+        //}
+        //getVal: function ($el) {
+        //    return $el.val();
+        //}
+    });
+
     $(function () {
         // The DOM is ready;
         var h1 = $('#h1');
@@ -54,9 +67,6 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                 },
                 '#selectId': {
                     observe: 'multipleValue',
-                    initialize: function ($el) {
-                        $el.select2({allowClear: true});
-                    },
                     selectOptions: {
                         collection: function () {
                             return ['One', 'Two', 'Three', 'Four'];
