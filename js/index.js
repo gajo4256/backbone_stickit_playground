@@ -54,9 +54,16 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                 },
                 '#selectId': {
                     observe: 'multipleValue',
+                    initialize: function ($el) {
+                        $el.select2({allowClear: true});
+                    },
                     selectOptions: {
                         collection: function () {
-                            return [1, 2, 3, 4];
+                            return ['One', 'Two', 'Three', 'Four'];
+                        },
+                        defaultOption: {
+                            label: '-- Select one --',
+                            value: null
                         }
                     }
                 }
