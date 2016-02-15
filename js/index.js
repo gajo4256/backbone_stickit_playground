@@ -66,6 +66,16 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                             value: null
                         }
                     }
+                },
+                '#stickitTI': {
+                    attributes: [{
+                        name: 'class',
+                        observe: 'lastName',
+                        onGet: 'verify'
+                    }]
+                },
+                '#textInput': {
+                    observe: 'lastName'
                 }
             },
 
@@ -132,6 +142,14 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                     $btnShow.hide()
                 } else {
                     $btnShow.show();
+                }
+            },
+
+            verify: function (val) {
+                if (val) {
+                    return 'has-success';
+                } else {
+                    return 'has-error';
                 }
             }
 
