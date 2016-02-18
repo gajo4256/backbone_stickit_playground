@@ -8,20 +8,10 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
         initialize: function ($el, model, options) {
             $el.select2({allowClear: true});
         }
-        //update: function ($el, val) {
-        //    $el.val(val);
-        //}
-        //getVal: function ($el) {
-        //    return $el.val();
-        //}
     });
 
     $(function () {
         // The DOM is ready;
-        var h1 = $('#h1');
-        h1.text('From jquery');
-        h1.append(' ' + model.get('name'));
-
 
         var SimpleView = Backbone.View.extend({
             events: {
