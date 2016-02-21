@@ -13,3 +13,4 @@ Each commit represents different stickit possibility. To see just specific funct
 - select2 - how to integrate 3rd party library with stickit, in this case with select2
 - attr - modify desired input element with specific attribute, in this case with class attribute
 - handler - add global handler on app level
+- saved_select - how to bind model attribute for select option that was already saved (e.g. saved entitiy on BE). Also how to set the new value again in the desired format of the model if the collection available for select is of a different type.
