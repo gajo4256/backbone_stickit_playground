@@ -1,5 +1,5 @@
 // made global for easier testing purpose...
-var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
+var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin', address: {id: 2, city: 'Beograd'}});
 
 (function($, Backbone) {
 
@@ -44,9 +44,9 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
         //******** STICKIT ************//
         var newModel = new Backbone.Model({param1: "02/02/2016"});
         var newCollection = new Backbone.Collection([
-            {id: 1, data: {state: 'Croatia', capital: 'Zagreb'}},
-            {id: 2, data: {state: 'Serbia', capital: 'Beograd'}},
-            {id: 3, data: {state: 'BiH', capital: 'Sarajevo'}}
+            {id: 1, data: {state: 'Croatia', capital: 'Zagreb', id: 1}},
+            {id: 2, data: {state: 'Serbia', capital: 'Beograd', id: 2}},
+            {id: 3, data: {state: 'BiH', capital: 'Sarajevo', id: 3}}
         ]);
 
         var StickitView = Backbone.View.extend({
@@ -56,11 +56,29 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
                     visible: 'isVisible'
                 },
                 '#selectId': {
-                    observe: 'multipleValue',
+                    // we observe 'city' attribute from the model. This is a good example if we already have saved
+                    // model with this attribute from BE side.
+                    observe: 'address',
+                    // onGet is synced with "valuePath". So if valuPath beneath is e.g. 'id' instead of 'data.capital'
+                    // then you need to return 'id' value from onGet
+                    onGet: function (value, options) {
+                        return value.id;
+                    },
+                    onSet: function (value, options) {
+                        // if new value is selected we find it in the collection and return as 'address' attribute of model
+                        // (this is the format that we need for our model)
+                        var address = this.collection.findWhere({id: value}).get('data');
+                        return {
+                            id: value, // or address.id
+                            city: address.capital
+                        };
+                    },
                     selectOptions: {
                         collection: function () {
-                            return ['One', 'Two', 'Three', 'Four'];
+                            return this.collection.toJSON();
                         },
+                        labelPath: 'data.capital',
+                        valuePath: 'data.id',
                         defaultOption: {
                             label: '-- Select one --',
                             value: null
@@ -91,11 +109,11 @@ var model = new Backbone.Model({name: 'Tommy', lastName: 'Gavin'});
             },
 
             render: function () {
-                this.stickit();
                 if (true) {
                     this.addBinding(newModel, '#nameSt2', this.customBindings());
                     this.addBinding(newModel, '#readOnlyLastNameSt', 'param1');
                 }
+                this.stickit();
                 return this;
             },
 
